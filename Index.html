@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary ❤️ - ข้อความจากใจ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f3ed;
+            --card-bg: #fffdf9;
+            --text-color: #5c4b43;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- หน้าที่ 1: ซองจดหมาย --- */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 1s ease;
+        }
+
+        .envelope-box {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-box:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            width: 280px;
+            height: 180px;
+            background-color: #e3d5ca;
+            border-radius: 6px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(92, 75, 67, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #d5c4b3;
+        }
+
+        .envelope-seal {
+            font-size: 28px;
+            background: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .tap-text {
+            margin-top: 20px;
+            font-size: 15px;
+            color: #8c7868;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* --- หน้าที่ 2: เนื้อหาเว็บหลัก --- */
+        #main-screen {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .show-main {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .content-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 30px rgba(92, 75, 67, 0.08);
+            margin-bottom: 20px;
+            border: 1px solid #ede4dc;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #4a3b32;
+        }
+
+        .cassette-box {
+            text-align: center;
+            background: #f4ede2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px dashed #d5c4b3;
+        }
+
+        .song-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .song-artist {
+            font-size: 14px;
+            color: #8c7868;
+            margin-bottom: 15px;
+        }
+
+        .play-btn {
+            background-color: #5c4b43;
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .play-btn:hover {
+            background-color: #7d675c;
+        }
+
+        .liner-note {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #5c4b43;
+            white-space: pre-line;
+        }
+
+        .timer-display {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #b5838d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- หน้าที่ 1: ซองจดหมายเริ่มต้น -->
+    <div id="envelope-screen">
+        <div class="envelope-box" onclick="openEnvelope()">
+            <div class="envelope">
+                <div class="envelope-seal">💌</div>
+            </div>
+            <div class="tap-text">Tap to open</div>
+        </div>
+    </div>
+
+    <!-- หน้าที่ 2: เนื้อหาด้านใน -->
+    <div id="main-screen">
+        <!-- การ์ดเพลง / Mixtape -->
+        <div class="content-card">
+            <h2>Songs for you 🎶</h2>
+            <div class="cassette-box">
+                <div class="song-title">ข้อความ</div>
+                <div class="song-artist">Pause</div>
+                <button class="play-btn" id="playBtn" onclick="togglePlay()">▶ Play Music</button>
+            </div>
+            
+            <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Liner Note:</div>
+            <div class="liner-note">
+                ถึงเธอคนพิเศษ,
+                
+                "จะอยู่ไกลห่างสักเท่าไหร่ สิ่งหนึ่งที่ยึดใจเราไว้ไม่ให้ห่างกัน คือความห่วงใยที่เธอให้ฉัน คำพูดเหล่านั้นที่เธอคอยส่งมา..."
+
+                ขอบคุณสำหรับทุกๆ ความห่วงใยและข้อความดีๆ ที่คอยเติมเต็มให้กันในทุกวันนะ ไม่ว่าจะนานแค่ไหนความรู้สึกที่มีให้ก็ยังเหมือนเดิม สุขสันต์วันครบรอบนะคะ ❤️
+            </div>
+        </div>
+
+        <!-- การ์ดเวลารวมความทรงจำ -->
+        <div class="content-card">
+            <h2>Our Journey ⏱️</h2>
+            <p style="margin: 0; font-size: 14px; color: #8c7868; text-align: center;">เวลาที่เราเดินทางร่วมกันมาตั้งแต่ 4 กรกฎาคม 2569:</p>
+            <div class="timer-display" id="timer">กำลังโหลด...</div>
+        </div>
+    </div>
+
+    <!-- ลิงก์เพลงจาก YouTube (ฝังเสียงเพลง ข้อความ - Pause) -->
+    <iframe id="youtubePlayer" width="0" height="0" src="" frameborder="0"></iframe>
+
+    <script>
+        function openEnvelope() {
+            const envelopeScreen = document.getElementById('envelope-screen');
+            const mainScreen = document.getElementById('main-screen');
+            
+            // ใส่ลิงก์ YouTube แบบ Autoplay เมื่อกดเปิดซอง
+            const ytPlayer = document.getElementById('youtubePlayer');
+            ytPlayer.src = "https://www.youtube.com/embed/z3OZ82vgYQg?autoplay=1&enablejsapi=1";
+
+            document.getElementById('playBtn').innerText = "⏸ Pause / Playing...";
+
+            envelopeScreen.classList.add('fade-out');
+            setTimeout(() => {
+                envelopeScreen.style.display = 'none';
+                mainScreen.classList.add('show-main');
+            }, 800);
+        }
+
+        let isPlaying = true;
+        function togglePlay() {
+            const ytPlayer = document.getElementById('youtubePlayer');
+            const playBtn = document.getElementById('playBtn');
+            
+            if (isPlaying) {
+                ytPlayer.src = ""; // หยุดเพลงโดยเคลียร์ src
+                playBtn.innerText = "▶ Play Music";
+                isPlaying = false;
+            } else {
+                ytPlayer.src = "https://www.youtube.com/embed/z3OZ82vgYQg?autoplay=1&enablejsapi=1";
+                playBtn.innerText = "⏸ Pause / Playing...";
+                isPlaying = true;
+            }
+        }
+
+        // ตั้งค่าวันที่เริ่มต้นคบกัน: 4 กรกฎาคม 2569 
+        // (ปี 2026, เดือนกรกฎาคม = 6, วัน = 4)
+        const startDate = new Date(2026, 6, 4); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            if (diff < 0) {
+                document.getElementById('timer').innerText = "กำลังรอวันเริ่มต้นของเรานะ ❤️";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('timer').innerText = 
+                `${days} วัน ${hours} ชม. ${minutes} นาที ${seconds} วินาที`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
